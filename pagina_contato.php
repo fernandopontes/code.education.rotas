@@ -19,7 +19,7 @@
                         <fieldset><lengend><strong>Mensagem:</strong></lengend>%s</fieldset><br><br>', $_POST['nome'], $_POST['email'], $_POST['assunto'], $_POST['mensagem']);
             }
             ?>
-            <form action="<?php print($config['url-site']); ?>contato" method="post" role="form">
+            <form action="contato" method="post" role="form">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nome:</label>
                     <input type="text" class="form-control" name="nome" placeholder="Digite seu nome">

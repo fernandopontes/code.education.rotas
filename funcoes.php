@@ -1,24 +1,30 @@
 <?php
 
-function verifica_rota($config, $rotas)
+function carregar_pagina($config, $rotas)
 {
-    $rota = array();
+    $pagina = array();
 
-    $uri = str_replace($config['url-site'], '', "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+    $url_atual = ltrim($_SERVER['REQUEST_URI'], '/');
 
-    if($uri != "")
+    if($url_atual != "")
     {
-        if(file_exists($config['diretorio-site'] . '/' . $rotas[$uri]) && $rotas[$uri] != "")
+        if(array_key_exists($url_atual, $rotas))
         {
-            $rota = array('arquivo' => $rotas[$uri], 'status-rota' => TRUE, 'uri' => $uri);
+            if(file_exists($rotas[$url_atual]))
+            {
+                $pagina = array('pagina' => $rotas[$url_atual], 'status-rota' => TRUE, 'uri' => $url_atual);
+            }
+            else {
+                header('Location:'. $config['erro-404']);
+            }
         }
         else {
-            header('Location:'.$config['url-site'] . $config['erro-404']);
+            header('Location:'. $config['erro-404']);
         }
     }
     else {
-        $rota = array('arquivo' => 'home', 'status-rota' => FALSE);
+        $pagina = array('pagina' => $rotas['home'], 'status-rota' => TRUE, 'uri' => 'home');
     }
 
-    return $rota;
+    return $pagina;
 }

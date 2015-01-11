@@ -8,7 +8,7 @@ include_once 'rotas.php';
 ///// Funções para o site //////
 include_once 'funcoes.php';
 
-$rota = verifica_rota($config, $rotas);
+$pagina = carregar_pagina($config, $rotas);
 
 ?>
 
@@ -52,11 +52,11 @@ $rota = verifica_rota($config, $rotas);
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li <?php (isset($rota['uri']) && $rota['uri'] == "home") ? print('class="active"') : NULL; ?>><a href="home">Home</a></li>
-                        <li <?php (isset($rota['uri']) && $rota['uri'] == "empresa") ? print('class="active"') : NULL; ?>><a href="empresa">Empresa</a></li>
-                        <li <?php (isset($rota['uri']) && $rota['uri'] == "produtos") ? print('class="active"') : NULL; ?>><a href="produtos">Produtos</a></li>
-                        <li <?php (isset($rota['uri']) && $rota['uri'] == "servicos") ? print('class="active"') : NULL; ?>><a href="servicos">Serviços</a></li>
-                        <li <?php (isset($rota['uri']) && $rota['uri'] == "contato") ? print('class="active"') : NULL; ?>><a href="contato">Contato</a></li>
+                        <li <?php (isset($pagina['uri']) && $pagina['uri'] == "home") ? print('class="active"') : NULL; ?>><a href="home">Home</a></li>
+                        <li <?php (isset($pagina['uri']) && $pagina['uri'] == "empresa") ? print('class="active"') : NULL; ?>><a href="empresa">Empresa</a></li>
+                        <li <?php (isset($pagina['uri']) && $pagina['uri'] == "produtos") ? print('class="active"') : NULL; ?>><a href="produtos">Produtos</a></li>
+                        <li <?php (isset($pagina['uri']) && $pagina['uri'] == "servicos") ? print('class="active"') : NULL; ?>><a href="servicos">Serviços</a></li>
+                        <li <?php (isset($pagina['uri']) && $pagina['uri'] == "contato") ? print('class="active"') : NULL; ?>><a href="contato">Contato</a></li>
                     </ul>
                 </div>
             </div>
@@ -67,9 +67,9 @@ $rota = verifica_rota($config, $rotas);
 
     <?php
 
-    if($rota['status-rota'])
+    if($pagina['status-rota'])
     {
-        include_once $rota['arquivo'];
+        include_once $pagina['pagina'];
     }
     else {
         include_once 'pagina_home.php';
